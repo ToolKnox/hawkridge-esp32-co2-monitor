@@ -1,0 +1,190 @@
+<div class="d-flex justify-content-center" id="loadingprogress">
+	<div class="spinner-border" role="status">
+		<span class="sr-only"></span>
+	</div>
+</div>
+
+
+<form id="hardwareeditform" class="invisible">
+	<div class="col-md-auto">
+		<div class="row mb-3">
+			<div class="card w-100" id="HardwareSettings">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<span class="align-middle">Hardware configuration</span>
+					<button type="button" class="btn px-1 py-0 m-0 btn-outline-info" onclick="loadHardwareSettings();">&#x2b6f;</button>
+				</div>
+				<div class="card-body">
+					<div class="mb-3">
+						<h5>I2C Configuration</h5>
+						<div class="form-row">
+							<div class="col-md mb-2">
+								<label for="sda_pin">SDA pin</label>
+								<input type="number" class="form-control" id="sda_pin" min="-1" max="35" step="1" required>
+							</div>
+							<div class="col-md mb-2">
+								<label for="scl_pin">SCL pin</label>
+								<input type="number" class="form-control" id="scl_pin" min="-1" max="35" step="1" required>
+							</div>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<h5>SPI Configuration</h5>
+						<div class="form-check mb-3">
+							<input type="checkbox" class="form-check-input" id="enable_soft_spi">
+							<label class="form-check-label" for="enable_soft_spi">Enable software SPI</label>
+						</div>
+						<div class="form-row">
+							<div class="col-md mb-2">
+								<label for="mosi_pin">MOSI pin</label>
+								<input type="number" class="form-control" id="mosi_pin" min="-1" max="35" step="1" required>
+							</div>
+							<div class="col-md mb-2">
+								<label for="miso_pin">MISO pin (unused)</label>
+								<input type="number" class="form-control" id="miso_pin" min="-1" max="35" step="1" required>
+							</div>
+							<div class="col-md mb-2">
+								<label for="sck_pin">SCK pin</label>
+								<input type="number" class="form-control" id="sck_pin" min="-1" max="35" step="1" required>
+							</div>
+							<div class="col-md mb-2">
+								<label for="cs_pin">CS pin</label>
+								<input type="number" class="form-control" id="cs_pin" min="-1" max="35" step="1" required>
+							</div>
+							<div class="col-md mb-2">
+								<label for="dc_pin">DC pin</label>
+								<input type="number" class="form-control" id="dc_pin" min="-1" max="35" step="1" required>
+							</div>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<h5>Other</h5>
+						<div class="form-row">
+							<div class="col-md mb-2">
+								<label for="reset_pin">Display RESET pin</label>
+								<input type="number" class="form-control" id="reset_pin" min="-1" max="35" step="1" required>
+							</div>
+							<div class="col-md mb-2">
+								<label for="buzzer_pin">Alarm buzzer pin</label>
+								<input type="number" class="form-control" id="buzzer_pin" min="-1" max="35" step="1" required>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer text-muted">
+					<button type="button" class="btn btn-primary mb-2" onclick="saveHardwareSettings();" id="SaveHardwareSettings">Save settings</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type='text/javascript'>
+
+
+	$(document).ready(function () {
+		loadHardwareSettings();
+	});
+
+	function updateSlider(obj) {
+		$('#' + obj.id + 'Value').val(obj.value + ' s');
+	}
+
+	//TODO shared
+	function HttpResponseException(message, status) {
+		this.message = message;
+		this.status = status;
+		this.name = "HTTP Response error";
+	}
+
+	HttpResponseException.prototype.toString = function () {
+		return this.name + ': ' + this.status + ' "' + this.message + '"';
+	}
+
+	function validateResponse(response) {
+		if (!response.ok) {
+			throw new HttpResponseException(response.statusText, response.status);
+		}
+		return response;
+	}
+
+	   function loadHardwareSettings() {
+		   fetch(hostName + '/config/hardware')
+			   .then(validateResponse)
+			   .then(res => res.json())
+			   .then((settings) => {
+				   $('#sda_pin').val(settings.sda_pin);
+				   $('#scl_pin').val(settings.scl_pin);
+				   $('#mosi_pin').val(settings.mosi_pin);
+				   $('#miso_pin').val(settings.miso_pin);
+				   $('#sck_pin').val(settings.sck_pin);
+				   $('#cs_pin').val(settings.cs_pin);
+				   $('#dc_pin').val(settings.dc_pin);
+				   $('#reset_pin').val(settings.reset_pin);
+				   $('#buzzer_pin').val(settings.buzzer_pin);
+				   $('#enable_soft_spi').prop('checked', settings.software_spi);
+
+				   $("#loadingprogress").addClass('invisible');
+				   $('#hardwareeditform').removeClass('invisible');
+			   }).catch(function (error) {
+				   if (error instanceof HttpResponseException && error.status === 404) {
+					   alert("Cannot load hardware settings\n" + error);
+				   }
+				   if (confirm("Cannot load hardware settings\n" + error + "\nTry again?")) {
+					   loadHardwareSettings();
+				   }
+			   });
+	   }
+
+	   function saveHardwareSettings() {
+		   $("#SaveHardwareSettings").prop('disabled', true);
+		   let settings = {
+			   "sda_pin": parseInt($('#sda_pin').val(), 10),
+			   "scl_pin": parseInt($('#scl_pin').val(), 10),
+			   "mosi_pin": parseInt($('#mosi_pin').val(), 10),
+			   "miso_pin": parseInt($('#miso_pin').val(), 10),
+			   "sck_pin": parseInt($('#sck_pin').val(), 10),
+			   "cs_pin": parseInt($('#cs_pin').val(), 10),
+			   "dc_pin": parseInt($('#dc_pin').val(), 10),
+			   "reset_pin": parseInt($('#reset_pin').val(), 10),
+			   "buzzer_pin": parseInt($('#buzzer_pin').val(), 10),
+			   "software_spi": $('#enable_soft_spi').is(':checked')
+		   };
+		   fetch(hostName + '/config/hardware', {
+			   method: 'post',
+			   mode: 'no-cors',
+			   cache: 'no-cache',
+			   credentials: 'same-origin',
+			   headers: { "Content-Type": "application/json" },
+			   body: JSON.stringify(settings, undefined, '\t')
+		   })
+			   .then(res => {
+				   if (res.status === 200 || res.status === 201 || res.type === "opaque") {
+					   if (confirm("Hardware settings saved.\nDo you want to reboot device to\nchanges take place?")) {
+						   reboot();
+						   return;
+					   }
+				   } else {
+					   alert("Not sure if config saved\nStatus: " + res.status + "\nBody:\n" + res.body);
+				   }
+			   })
+			   .catch(function (error) {
+				   alert(error);
+			   });
+		   $("#SaveHardwareSettings").prop('disabled', false);
+	   }
+
+	function reboot() {
+		fetch(hostName + '/config/reboot')
+			.then((programs) => {
+			}).catch(function (error) {
+				alert(error);
+			}
+			);
+		mainScreen();
+	}
+
+
+
+</script>

@@ -1,0 +1,12 @@
+{
+	"sda_pin": 8,
+	"scl_pin": 10,
+	"mosi_pin": 6,
+	"sck_pin": 4,
+	"miso_pin": 5,
+	"cs_pin": 7,
+	"dc_pin": 21,
+	"reset_pin": -1,
+	"buzzer_pin": 20,
+	"software_spi": false
+}

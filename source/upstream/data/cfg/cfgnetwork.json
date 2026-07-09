@@ -1,0 +1,24 @@
+{
+	"hostname": "air-sensor",
+	"listenPort": 80,
+	"ntpEnabled": true,
+	"ntpHost": "pool.ntp.org",
+	"ntpUtcOffset": 0,
+	"ntpDaylightUtcOffset": 3600,
+	"timeZone": "CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00",
+	"loggerEnabled": false,
+	"loggerHost": "192.168.192.1",
+	"loggerPort": 8701,
+	"loggerTimeoutMs": 10000,
+	"mqtt": {
+		"enabled": false,
+		"brokerAddress": "",
+		"brokerPort": 1883,
+		"username": "",
+		"password": "",
+		"clientId": "air-sensor",
+		"base": "air-sensor",
+		"keepAlive": 60,
+		"interval": 30
+	}
+}
