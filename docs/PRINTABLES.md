@@ -7,5 +7,5 @@ Printables page: https://www.printables.com/model/1776629-esp32-c3-co2-monitor-e
 ## Page sections
 
 - **Files** — printable STL/CAD files for the build.
-- **Documentation** — `ESP32-C3 CO2 Monitor Enclosure Draft Bill of Material.pdf` with the parts list.
+- **Documentation** — `ESP32-C3 CO2 Monitor Enclosure Bill of Material.pdf` with the parts list.
 - **Description** — short project overview and links back to these docs.

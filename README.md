@@ -7,7 +7,7 @@ This repository holds the Hawkridge documentation and source-asset notes for the
 ## Where to find things
 
 - Printables model and printable files: https://www.printables.com/model/1776629-esp32-c3-co2-monitor-enclosure
-- Bill of Material: `ESP32-C3 CO2 Monitor Enclosure Draft Bill of Material.pdf` in the Printables Documentation section
+- Bill of Material: `ESP32-C3 CO2 Monitor Enclosure Bill of Material.pdf` in the Printables Documentation section
 - Parts list summary: `docs/BILL-OF-MATERIAL.md`
 - Source-code, firmware, PCB, and design-asset notes: `docs/source-assets.md`
 - Assembly or install notes, when available: files under `docs/`
