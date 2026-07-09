@@ -6,7 +6,7 @@ Status: draft / review package. Not published for release.
 
 ## Links
 
-- Printables draft: pending
+- Printables draft: https://www.printables.com/model/1776629-esp32-c3-co2-monitor-enclosure
 - Original source/remix parent: https://github.com/intuibase/esp32_co2_monitor
 - Maker Portal slug: `esp32-co2-monitor`
 
