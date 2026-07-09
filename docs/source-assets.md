@@ -1,10 +1,10 @@
 # Source assets
 
-Original source: https://github.com/intuibase/esp32_co2_monitor
+Original source/remix parent: https://github.com/intuibase/esp32_co2_monitor
 
-This repo tracks the Hawkridge documentation/refurbishment pass. Source code and PCB assets stay attributed to the original upstream project until a full import/refurbishment pass is approved.
+This page lists source-code, firmware, configuration, PCB, and electronics-design assets relevant to the Hawkridge refurbishment package.
 
-## Code/config candidates
+## Code, firmware, and configuration
 
 - `data/html/deps/bms.min.js`
 - `src/DeviceDiagnostics.h`
@@ -17,6 +17,6 @@ This repo tracks the Hawkridge documentation/refurbishment pass. Source code and
 - `src/config.h`
 - `src/main.cpp`
 
-## PCB/electronics manufacturing candidates
+## PCB and electronics manufacturing assets
 
 - `custom_partition.csv`
