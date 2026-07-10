@@ -1,6 +1,14 @@
 # ESP32-C3 CO2 Monitor Enclosure
 
 MIT ESP32-C3 air-quality monitor with SCD41, BMP180, LCD/OLED display notes, firmware, wiring, and 3D printed enclosure files.
+## Documentation download
+
+Download the complete build documentation/source package from this GitHub repository:
+
+- **Download ZIP:** use GitHub's **Code → Download ZIP** button.
+- **Start here:** `README.md` for the build/install guide.
+- **Documentation pointer:** `download-documentation/README.md`.
+- **Mirrored upstream source/assets:** `source/upstream/`.
 
 ## Installation / quick start
 
@@ -66,4 +74,3 @@ https://github.com/intuibase/esp32_co2_monitor
 - Full mirrored upstream source/software/PCB files: `source/upstream/`
 - Source asset index: `docs/source-assets.md`
 - Standalone install/build guide: `docs/INSTALLATION.md`
-
